@@ -3,9 +3,8 @@ package com.example.casestudy.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flights")
@@ -16,6 +15,10 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne()
+    @JoinColumn(name = "tenant")
+    private Tenant tenant;
+
     @ManyToOne
     @JoinColumn(name = "depatureAirport")
     private Airport departureAirport;
@@ -24,9 +27,9 @@ public class Flight {
     @JoinColumn(name = "destinationAirport")
     private Airport destinationAirport;
 
-    private Date departureDate;
+    private LocalDateTime departureDate;
 
-    private Date returnDate;
+    private Boolean isReturn = false;
 
     private double price;
 }

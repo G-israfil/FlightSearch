@@ -12,5 +12,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        show_sql: true
 
 
+app:
+  jwt:
+    secret: a88ddc9d796717bd0aab13d65e0f46cbf6c84c3a7a513a30d2c27e1b5f3431d7

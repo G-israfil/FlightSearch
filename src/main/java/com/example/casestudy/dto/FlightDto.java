@@ -1,8 +1,9 @@
 package com.example.casestudy.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class FlightDto {
@@ -10,9 +11,11 @@ public class FlightDto {
 
     private int destinationAirport;
 
-    private Date departureDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime departureDate;
 
-    private Date returnDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime returnDate;
 
     private double price;
 }

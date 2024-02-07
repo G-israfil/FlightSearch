@@ -1,6 +1,6 @@
 package com.example.casestudy.security;
 
-import com.pepolon.backend.tenant.TenantService;
+import com.example.casestudy.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,9 +26,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final TenantService tenantService;
     private final JwtAuthFilter jwtAuthFilter;
-
+    private final TenantService tenantService;
     @Bean
     public PasswordEncoder passwordEncoder() {
 
@@ -69,15 +68,10 @@ public class WebSecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers(HttpMethod.POST,
-                    "/tenant/sign-up",
-                    "/vacancy/search**",
-                    "/tenant/sign-in",
-                    "/email-bulletin/**").permitAll()
+                    "/auth/createTenant",
+                        "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.GET,
-                    "/organization/**",
-                    "/vacancy/**",
-                    "/tenant/generate-tenant-url/**",
-                    "/email-bulletin/**").permitAll()
+                    "/auth/login").permitAll()
                 .anyRequest().authenticated())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

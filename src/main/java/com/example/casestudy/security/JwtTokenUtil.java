@@ -55,10 +55,10 @@ public class JwtTokenUtil implements Serializable {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", userDetails.getAuthorities());
-        return doGenerateToken(claims, userDetails.getUsername(), userDetails.getUuid().toString());
+        return doGenerateToken(claims, userDetails.getUsername());
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String subject, String jti) {
+    private String doGenerateToken(Map<String, Object> claims, String subject) {
 
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()

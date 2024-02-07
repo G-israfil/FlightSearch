@@ -1,4 +1,10 @@
 package com.example.casestudy.dto;
 
-public class Tenant {
+import lombok.Data;
+
+@Data
+public class TenantDto {
+    private String username;
+    private String password;
+
 }
